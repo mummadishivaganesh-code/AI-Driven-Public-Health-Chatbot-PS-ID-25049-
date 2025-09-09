@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect, type FormEvent } from 'react';
@@ -5,7 +6,6 @@ import { SendHorizonal } from 'lucide-react';
 import { getHealthAnswer } from '@/app/actions';
 import { ChatMessage, TypingIndicator, type Message } from '@/components/chat-message';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
   SelectContent,
@@ -16,7 +16,6 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 
 const languages = [
   'English',
@@ -49,10 +48,10 @@ export default function ChatbotPage() {
 
   useEffect(() => {
     if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-        if (viewport) {
-            viewport.scrollTop = viewport.scrollHeight;
-        }
+      const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight;
+      }
     }
   }, [messages, isLoading]);
 
@@ -85,42 +84,42 @@ export default function ChatbotPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] flex-col">
-      <Card className="flex flex-1 flex-col overflow-hidden">
-        <CardHeader className="flex-row items-center justify-between border-b">
-          <CardTitle className="font-headline text-2xl">
-            AI Health Assistant
-          </CardTitle>
-          <Select value={language} onValueChange={setLanguage}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select language" />
-            </SelectTrigger>
-            <SelectContent>
-              {languages.map((lang) => (
-                <SelectItem key={lang} value={lang}>
-                  {lang}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </CardHeader>
-        <CardContent className="flex-1 overflow-auto p-0">
-          <ScrollArea className="h-full" ref={scrollAreaRef}>
-            <div className="space-y-6 p-6">
-              {messages.map((message, index) => (
-                <ChatMessage key={index} message={message} />
-              ))}
-              {isLoading && <TypingIndicator />}
-            </div>
-          </ScrollArea>
-        </CardContent>
-        <div className="border-t p-4">
-          <form onSubmit={handleSubmit} className="flex items-center gap-4">
+    <div className="relative flex h-[calc(100vh-3.5rem)] flex-col">
+      <div className="absolute top-4 right-4 z-10">
+        <Select value={language} onValueChange={setLanguage}>
+          <SelectTrigger className="w-[180px] bg-background">
+            <SelectValue placeholder="Select language" />
+          </SelectTrigger>
+          <SelectContent>
+            {languages.map((lang) => (
+              <SelectItem key={lang} value={lang}>
+                {lang}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <ScrollArea className="flex-1" ref={scrollAreaRef}>
+        <div className="mx-auto max-w-3xl w-full space-y-6 p-4 sm:p-6 lg:p-8">
+          {messages.map((message, index) => (
+            <ChatMessage key={index} message={message} />
+          ))}
+          {isLoading && <TypingIndicator />}
+        </div>
+      </ScrollArea>
+
+      <div className="sticky bottom-0 bg-background/50 pb-4 pt-2 backdrop-blur-sm">
+        <div className="mx-auto max-w-3xl w-full px-4 sm:px-6 lg:px-8">
+          <form
+            onSubmit={handleSubmit}
+            className="relative flex items-center"
+          >
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about malaria, dengue, symptoms..."
-              className="min-h-1 resize-none"
+              className="min-h-12 resize-none rounded-2xl border-2 border-border bg-card pr-14 shadow-lg"
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
@@ -128,13 +127,18 @@ export default function ChatbotPage() {
                 }
               }}
             />
-            <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+            <Button
+              type="submit"
+              size="icon"
+              disabled={isLoading || !input.trim()}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg"
+            >
               <SendHorizonal className="h-5 w-5" />
               <span className="sr-only">Send</span>
             </Button>
           </form>
         </div>
-      </Card>
+      </div>
     </div>
   );
 }

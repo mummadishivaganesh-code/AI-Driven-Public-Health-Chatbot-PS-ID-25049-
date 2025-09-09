@@ -35,6 +35,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 
 function UserNav() {
   return (
@@ -124,7 +125,9 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
           <SidebarTrigger className="sm:hidden" />
           <UserNav />
         </header>
-        <main className="p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className={cn('p-4 sm:p-6 lg:p-8', pathname === '/dashboard' && 'p-0')}>
+          {children}
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );
