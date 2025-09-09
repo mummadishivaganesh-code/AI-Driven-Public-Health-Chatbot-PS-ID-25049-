@@ -86,9 +86,11 @@ function UserNav() {
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+            </Link>
           </DropdownMenuItem>
           <ThemeToggle />
         </DropdownMenuGroup>
@@ -135,6 +137,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
     { href: '/dashboard/alerts', icon: AlertTriangle, label: 'Outbreak Alerts' },
     { href: '/dashboard/reminders', icon: Syringe, label: 'Vaccine Reminders' },
     { href: '/dashboard/profile', icon: User, label: 'Profile' },
+    { href: '/dashboard/settings', icon: Settings, label: 'Settings' },
   ];
 
   return (
