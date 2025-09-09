@@ -39,6 +39,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 
@@ -100,6 +101,24 @@ function UserNav() {
   );
 }
 
+function AppLogo() {
+  const { open } = useSidebar();
+  return (
+    <div className="flex items-center gap-2 p-2">
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+        <Stethoscope className="h-5 w-5" />
+      </div>
+      <span
+        className={cn('font-headline text-lg font-bold', {
+          'opacity-0 hidden': !open,
+        })}
+      >
+        Swasthya AI
+      </span>
+    </div>
+  );
+}
+
 export default function DashboardLayout({ children }: PropsWithChildren) {
   const pathname = usePathname();
 
@@ -118,12 +137,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
     <SidebarProvider>
       <Sidebar side="left" collapsible="icon" className="border-r">
         <SidebarHeader>
-          <div className="flex h-12 items-center gap-2 p-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Stethoscope className="h-5 w-5" />
-            </div>
-            <span className="font-headline text-lg font-bold">Swasthya AI</span>
-          </div>
+          <AppLogo />
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
@@ -146,7 +160,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
       <SidebarInset>
         <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm sm:justify-between">
           <div className="flex items-center gap-2">
-            <SidebarTrigger className="md:flex" />
+            <SidebarTrigger className="flex" />
           </div>
           <UserNav />
         </header>
