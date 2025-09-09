@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Syringe } from 'lucide-react';
 
 import { getVaccineReminder } from '@/app/actions';
@@ -27,8 +28,8 @@ function SubmitButton() {
 }
 
 export default function RemindersPage() {
-  const initialState = { reminder: null, error: null };
-  const [state, formAction] = useFormState(getVaccineReminder, initialState);
+  const initialState = { reminder: undefined, error: undefined };
+  const [state, formAction] = useActionState(getVaccineReminder, initialState);
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
