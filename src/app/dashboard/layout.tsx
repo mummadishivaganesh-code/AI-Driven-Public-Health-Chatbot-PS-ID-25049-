@@ -7,8 +7,10 @@ import {
   HeartPulse,
   LogOut,
   MessageSquare,
+  Moon,
   Settings,
   Stethoscope,
+  Sun,
   Syringe,
   User,
 } from 'lucide-react';
@@ -37,6 +39,25 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
+import { useTheme } from 'next-themes';
+import React from 'react';
+
+function ThemeToggle() {
+  const { setTheme, theme } = useTheme();
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      className="w-full justify-start gap-2 px-2 font-normal"
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+    >
+      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span>{theme === 'light' ? 'Dark' : 'Light'} Mode</span>
+    </Button>
+  );
+}
 
 function UserNav() {
   return (
@@ -69,6 +90,9 @@ function UserNav() {
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ThemeToggle />
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
