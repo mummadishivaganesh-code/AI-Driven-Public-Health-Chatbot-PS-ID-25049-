@@ -79,9 +79,11 @@ function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/profile">
+              <User className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
@@ -104,7 +106,7 @@ function UserNav() {
 function AppLogo() {
   const { open } = useSidebar();
   return (
-    <div className="flex items-center gap-2 p-2">
+    <Link href="/dashboard" className="flex items-center gap-2 p-2">
       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
         <Stethoscope className="h-5 w-5" />
       </div>
@@ -115,7 +117,7 @@ function AppLogo() {
       >
         Swasthya AI
       </span>
-    </div>
+    </Link>
   );
 }
 
@@ -131,6 +133,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
     },
     { href: '/dashboard/alerts', icon: AlertTriangle, label: 'Outbreak Alerts' },
     { href: '/dashboard/reminders', icon: Syringe, label: 'Vaccine Reminders' },
+    { href: '/dashboard/profile', icon: User, label: 'Profile' },
   ];
 
   return (
