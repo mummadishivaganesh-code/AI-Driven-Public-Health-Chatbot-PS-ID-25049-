@@ -21,7 +21,7 @@ export default function LandingPage() {
             Your personal health companion for disease awareness, symptom checking, and vaccination reminders.
           </p>
           <Button asChild className="mt-8 rounded-full" size="lg">
-            <Link href="/dashboard">
+            <Link href="/login">
               Let's Chat
               <MoveRight className="ml-2 h-5 w-5" />
             </Link>
@@ -36,9 +36,8 @@ export default function LandingPage() {
         <Image
           src="https://picsum.photos/1200/1800"
           alt="Healthcare professional using a tablet"
-          layout="fill"
-          objectFit="cover"
-          className="h-full w-full"
+          fill
+          className="h-full w-full object-cover"
           data-ai-hint="health technology"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent"></div>
