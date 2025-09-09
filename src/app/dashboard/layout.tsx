@@ -8,7 +8,6 @@ import {
   LogOut,
   MessageSquare,
   Moon,
-  PanelLeft,
   Settings,
   Stethoscope,
   Sun,
@@ -110,11 +109,11 @@ function AppLogo() {
   const { open } = useSidebar();
   return (
     <Link href="/dashboard" className="flex items-center gap-2 p-2 overflow-hidden">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shrink-0">
         <Stethoscope className="h-5 w-5" />
       </div>
       <span
-        className={cn('font-headline text-lg font-bold', {
+        className={cn('font-semibold text-lg', {
           'opacity-0 hidden': !open,
         })}
       >
