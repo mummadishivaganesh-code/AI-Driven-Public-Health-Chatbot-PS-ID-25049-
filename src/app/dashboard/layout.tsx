@@ -144,11 +144,13 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm sm:justify-end">
-          <SidebarTrigger className="sm:hidden" />
+        <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm sm:justify-between">
+          <SidebarTrigger />
           <UserNav />
         </header>
-        <main className={cn('p-4 sm:p-6 lg:p-8', pathname === '/dashboard' && 'h-[calc(100vh-3.5rem)] p-0 sm:p-0 lg:p-0')}>
+        <main className={cn('p-4 sm:p-6 lg:p-8', {
+          'h-[calc(100vh-3.5rem)] p-0 sm:p-0 lg:p-0': pathname === '/dashboard'
+        })}>
           {children}
         </main>
       </SidebarInset>
