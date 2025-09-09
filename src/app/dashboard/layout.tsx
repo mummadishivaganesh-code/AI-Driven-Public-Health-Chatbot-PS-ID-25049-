@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   AlertTriangle,
+  HeartPulse,
   LogOut,
   MessageSquare,
   Settings,
@@ -87,6 +88,11 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
 
   const navItems = [
     { href: '/dashboard', icon: MessageSquare, label: 'Chatbot' },
+    {
+      href: '/dashboard/symptom-checker',
+      icon: HeartPulse,
+      label: 'Symptom Checker',
+    },
     { href: '/dashboard/alerts', icon: AlertTriangle, label: 'Outbreak Alerts' },
     { href: '/dashboard/reminders', icon: Syringe, label: 'Vaccine Reminders' },
   ];
