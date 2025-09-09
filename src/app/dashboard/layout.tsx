@@ -15,6 +15,8 @@ import {
   User,
 } from 'lucide-react';
 import type { PropsWithChildren } from 'react';
+import React from 'react';
+import { useTheme } from 'next-themes';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -39,23 +41,16 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
-import { useTheme } from 'next-themes';
-import React from 'react';
 
 function ThemeToggle() {
   const { setTheme, theme } = useTheme();
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="w-full justify-start gap-2 px-2 font-normal"
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-    >
-      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    <DropdownMenuItem onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      <Sun className="mr-2 h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span>{theme === 'light' ? 'Dark' : 'Light'} Mode</span>
-    </Button>
+    </DropdownMenuItem>
   );
 }
 
@@ -91,9 +86,7 @@ function UserNav() {
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ThemeToggle />
-          </DropdownMenuItem>
+          <ThemeToggle />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
@@ -155,7 +148,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
           <SidebarTrigger className="sm:hidden" />
           <UserNav />
         </header>
-        <main className={cn('p-4 sm:p-6 lg:p-8', pathname === '/dashboard' && 'p-0')}>
+        <main className={cn('p-4 sm:p-6 lg:p-8', pathname === '/dashboard' && 'h-[calc(100vh-3.5rem)] p-0 sm:p-0 lg:p-0')}>
           {children}
         </main>
       </SidebarInset>
